@@ -3,14 +3,30 @@ title: "FCC 2016 Survey Analysis"
 output: html_notebook
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
-
 ```{r}
-plot(cars)
+library(tidyverse)
+library(stringr)
+
+FCC_df <- read.csv("2016-FCC-New-Coders-Survey-Data.csv")
+dim(FCC_df)
+
+FCC_df$JobRoleInterest<- str_trim(FCC_df$JobRoleInterest)
+DSInt_df <- filter(FCC_df,  JobRoleInterest == "Data Scientist / Data Engineer")
+dim(DSInt_df)
+
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+
+```{r}
+table(DSInt_df$AttendedBootcamp)
+
+DSInt_df1 <- DSInt_df
+DSInt_df1$AttendedBootcamp <- factor(DSInt_df1$AttendedBootcamp, levels = c(1, 0),
+                                     labels = c('Yes','No'))
+
+View(DSInt_df1)
+
+```
+

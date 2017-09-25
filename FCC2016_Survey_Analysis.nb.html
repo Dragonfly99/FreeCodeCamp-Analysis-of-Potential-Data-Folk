@@ -172,20 +172,42 @@ $(document).ready(function () {
 
 
 <!-- rnb-text-begin -->
-<p>This is an <a href="http://rmarkdown.rstudio.com">R Markdown</a> Notebook. When you execute code within the notebook, the results appear beneath the code.</p>
-<p>Try executing this chunk by clicking the <em>Run</em> button within the chunk or by placing your cursor inside it and pressing <em>Ctrl+Shift+Enter</em>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGxvdChjYXJzKVxuYGBgIn0= -->
-<pre class="r"><code>plot(cars)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5cbmBgYCJ9 -->
+<pre class="r"><code>library(tidyverse)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTG9hZGluZyB0aWR5dmVyc2U6IGdncGxvdDJcbkxvYWRpbmcgdGlkeXZlcnNlOiB0aWJibGVcbkxvYWRpbmcgdGlkeXZlcnNlOiB0aWR5clxuTG9hZGluZyB0aWR5dmVyc2U6IHJlYWRyXG5Mb2FkaW5nIHRpZHl2ZXJzZTogcHVycnJcbkxvYWRpbmcgdGlkeXZlcnNlOiBkcGx5clxuQ29uZmxpY3RzIHdpdGggdGlkeSBwYWNrYWdlcyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1cbmZpbHRlcigpOiBkcGx5ciwgc3RhdHNcbmxhZygpOiAgICBkcGx5ciwgc3RhdHNcbiJ9 -->
+<pre><code>Loading tidyverse: ggplot2
+Loading tidyverse: tibble
+Loading tidyverse: tidyr
+Loading tidyverse: readr
+Loading tidyverse: purrr
+Loading tidyverse: dplyr
+Conflicts with tidy packages ------------------------------------------------------------------------
+filter(): dplyr, stats
+lag():    dplyr, stats</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShzdHJpbmdyKVxuYGBgIn0= -->
+<pre class="r"><code>library(stringr)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the toolbar or by pressing <em>Ctrl+Alt+I</em>.</p>
-<p>When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the <em>Preview</em> button or press <em>Ctrl+Shift+K</em> to preview the HTML file).</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudmlldyhEU0ludF9kZjEpXG5cbmBgYCJ9 -->
+<pre class="r"><code>view(DSInt_df1)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gdmlldyhEU0ludF9kZjEpIDogY291bGQgbm90IGZpbmQgZnVuY3Rpb24gXCJ2aWV3XCJcbiJ9 -->
+<pre><code>Error in view(DSInt_df1) : could not find function &quot;view&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkZDQyAyMDE2IFN1cnZleSBBbmFseXNpcyINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQoNClRoaXMgaXMgYW4gW1IgTWFya2Rvd25dKGh0dHA6Ly9ybWFya2Rvd24ucnN0dWRpby5jb20pIE5vdGVib29rLiBXaGVuIHlvdSBleGVjdXRlIGNvZGUgd2l0aGluIHRoZSBub3RlYm9vaywgdGhlIHJlc3VsdHMgYXBwZWFyIGJlbmVhdGggdGhlIGNvZGUuIA0KDQpUcnkgZXhlY3V0aW5nIHRoaXMgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpSdW4qIGJ1dHRvbiB3aXRoaW4gdGhlIGNodW5rIG9yIGJ5IHBsYWNpbmcgeW91ciBjdXJzb3IgaW5zaWRlIGl0IGFuZCBwcmVzc2luZyAqQ3RybCtTaGlmdCtFbnRlciouIA0KDQpgYGB7cn0NCnBsb3QoY2FycykNCmBgYA0KDQpBZGQgYSBuZXcgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpJbnNlcnQgQ2h1bmsqIGJ1dHRvbiBvbiB0aGUgdG9vbGJhciBvciBieSBwcmVzc2luZyAqQ3RybCtBbHQrSSouDQoNCldoZW4geW91IHNhdmUgdGhlIG5vdGVib29rLCBhbiBIVE1MIGZpbGUgY29udGFpbmluZyB0aGUgY29kZSBhbmQgb3V0cHV0IHdpbGwgYmUgc2F2ZWQgYWxvbmdzaWRlIGl0IChjbGljayB0aGUgKlByZXZpZXcqIGJ1dHRvbiBvciBwcmVzcyAqQ3RybCtTaGlmdCtLKiB0byBwcmV2aWV3IHRoZSBIVE1MIGZpbGUpLg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkZDQyAyMDE2IFN1cnZleSBBbmFseXNpcyINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQoNCmBgYHtyfQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpsaWJyYXJ5KHN0cmluZ3IpDQoNCkZDQ19kZiA8LSByZWFkLmNzdigiMjAxNi1GQ0MtTmV3LUNvZGVycy1TdXJ2ZXktRGF0YS5jc3YiKQ0KZGltKEZDQ19kZikNCg0KRkNDX2RmJEpvYlJvbGVJbnRlcmVzdDwtIHN0cl90cmltKEZDQ19kZiRKb2JSb2xlSW50ZXJlc3QpDQpEU0ludF9kZiA8LSBmaWx0ZXIoRkNDX2RmLCAgSm9iUm9sZUludGVyZXN0ID09ICJEYXRhIFNjaWVudGlzdCAvIERhdGEgRW5naW5lZXIiKQ0KZGltKERTSW50X2RmKQ0KDQpgYGANCg0KDQoNCg0KYGBge3J9DQp0YWJsZShEU0ludF9kZiRBdHRlbmRlZEJvb3RjYW1wKQ0KDQpEU0ludF9kZjEgPC0gRFNJbnRfZGYNCkRTSW50X2RmMSRBdHRlbmRlZEJvb3RjYW1wIDwtIGZhY3RvcihEU0ludF9kZjEkQXR0ZW5kZWRCb290Y2FtcCwgbGV2ZWxzID0gYygxLCAwKSwNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBsYWJlbHMgPSBjKCdZZXMnLCdObycpKQ0KDQpWaWV3KERTSW50X2RmMSkNCg0KYGBgDQoNCg==</div>
 
 
 
