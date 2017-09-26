@@ -21,12 +21,13 @@ dim(DSInt_df)
 
 ```{r}
 table(DSInt_df$AttendedBootcamp)
+View(DSInt_df)
 
-DSInt_df1 <- DSInt_df
-DSInt_df1$AttendedBootcamp <- factor(DSInt_df1$AttendedBootcamp, levels = c(1, 0),
+DSInt_df$AttendedBootcamp <- factor(DSInt_df$AttendedBootcamp, levels = c(1, 0),
                                      labels = c('Yes','No'))
 
-View(DSInt_df1)
+table(DSInt_df$AttendedBootcamp)
 
 ```
 
+The majority of respondents have not attended a bootcamp before. Considering the small percentage, it makes no sense to look into the question of how many finished and how many got a job afterwords.
