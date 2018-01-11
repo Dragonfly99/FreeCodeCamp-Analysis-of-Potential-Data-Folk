@@ -12,7 +12,7 @@ dim(FCC_df)
 
 FCC_df$JobRoleInterest<- str_trim(FCC_df$JobRoleInterest)
 DSInt_df <- filter(FCC_df,  JobRoleInterest == "Data Scientist / Data Engineer")
-dim(DSInt_df)
+View(DSInt_df)
 
 ```
 
@@ -21,7 +21,7 @@ dim(DSInt_df)
 
 ```{r}
 table(DSInt_df$AttendedBootcamp)
-View(DSInt_df)
+
 
 DSInt_df$AttendedBootcamp <- factor(DSInt_df$AttendedBootcamp, levels = c(1, 0),
                                      labels = c('Yes','No'))
@@ -31,3 +31,88 @@ table(DSInt_df$AttendedBootcamp)
 ```
 
 The majority of respondents have not attended a bootcamp before. Considering the small percentage, it makes no sense to look into the question of how many finished and how many got a job afterwords.
+
+
+
+
+```{r}
+sum(is.na(DSInt_df$CityPopulation))
+ggplot(DSInt_df, aes(x = CityPopulation)) +
+  geom_bar()
+
+DSInt_df$IsSoftwareDev <- factor(DSInt_df$IsSoftwareDev, levels = c(1, 0),
+                                     labels = c('Yes','No'))
+
+ summary(DSInt_df$CountryLive)
+ summary(DSInt_df$EmploymentField)
+ summary(DSInt_df$IsSoftwareDev)
+ summary(DSInt_df$EmploymentStatus)
+
+```
+
+
+The marjority of our proppects live in large cities that are 100 thousand large. And a good chunk of our prospects are from the united states. About 267 of our prospects are employed but looking for work. 137 are unemployed but looking for work.
+
+
+```{r}
+summary(DSInt_df$SchoolDegree)
+summary(DSInt_df$Income)
+summary(DSInt_df$ExpectedEarning)
+
+table(DSInt_df$Gender)
+
+ggplot(DSInt_df, aes(x = ExpectedEarning)) +
+  geom_histogram(fill = "blue")
+
+
+sum(is.na(DSInt_df$ResourceCodecademy))
+sum(is.na(DSInt_df$ResourceBlogs))
+sum(is.na(DSInt_df$ResourceBooks))
+sum(is.na(DSInt_df$ResourceCodeWars))
+sum(is.na(DSInt_df$ResourceCoursera))
+sum(is.na(DSInt_df$ResourceDevTips))
+sum(is.na(DSInt_df$ResourceEdX))
+sum(is.na(DSInt_df$ResourceEggHead))
+sum(is.na(DSInt_df$ResourceFCC))
+sum(is.na(DSInt_df$ResourceGoogle))
+sum(is.na(DSInt_df$ResourceHackerRank))
+sum(is.na(DSInt_df$ResourceLynda))
+sum(is.na(DSInt_df$ResourceMDN))
+sum(is.na(DSInt_df$ResourceOdinProj))
+sum(is.na(DSInt_df$ResourceOther))
+sum(is.na(DSInt_df$ResourcePluralSight))
+sum(is.na(DSInt_df$ResourceReddit))
+sum(is.na(DSInt_df$ResourceSkillCrush))
+sum(is.na(DSInt_df$ResourceSoloLearn))
+sum(is.na(DSInt_df$ResourceStackOverflow))
+sum(is.na(DSInt_df$ResourceTreehouse))
+sum(is.na(DSInt_df$ResourceUdacity))
+sum(is.na(DSInt_df$ResourceUdemy))
+sum(is.na(DSInt_df$ResourceW3Schools))
+sum(is.na(DSInt_df$ResourceYouTube))
+```
+
+ Educational level demonstrates that most folks interested in the field have a bachelors degree or higher. 
+With that we can create a basic marketing persona. We'll call him Frank. 
+
+Frank is a 24 year old man living in New York City. He graduated from his university with a CS degree and is currently employed but looking to work as a data scientist. He's hoping to make $90,000 in his next role.
+
+ 
+ 
+ 
+```{r}
+## Start of part 2 to be completed.  Subsetting dataset for female demographic and following up with how to market
+
+fem <-  filter(DSInt_df, Gender == "female")
+View(fem)
+
+ summary(fem$CountryLive)
+ summary(fem$EmploymentField)
+ summary(fem$IsSoftwareDev)
+ summary(fem$EmploymentStatus)
+ summary(fem$SchoolDegree)
+ summary(fem$Income)
+ summary(fem$ExpectedEarning)
+```
+
+
