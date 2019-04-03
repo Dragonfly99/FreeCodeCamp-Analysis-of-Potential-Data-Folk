@@ -3,16 +3,17 @@ title: "FCC 2016 Survey Analysis"
 output: html_notebook
 ---
 
+
+
 ```{r}
 library(tidyverse)
 library(stringr)
-
 FCC_df <- read.csv("2016-FCC-New-Coders-Survey-Data.csv")
 dim(FCC_df)
 
 FCC_df$JobRoleInterest<- str_trim(FCC_df$JobRoleInterest)
 DSInt_df <- filter(FCC_df,  JobRoleInterest == "Data Scientist / Data Engineer")
-View(DSInt_df)
+glimpse(DSInt_df)
 
 ```
 
@@ -20,14 +21,21 @@ View(DSInt_df)
 
 
 ```{r}
+stem(DSInt_df$Age)
 table(DSInt_df$AttendedBootcamp)
 
 
 DSInt_df$AttendedBootcamp <- factor(DSInt_df$AttendedBootcamp, levels = c(1, 0),
                                      labels = c('Yes','No'))
 
+DSInt_df %>%
+    ggplot(aes(AttendedBootcamp)) +
+    geom_bar(fill = "green")
+
 table(DSInt_df$AttendedBootcamp)
 
+DSInt_df %>%
+count(Age, n = 45)
 ```
 
 The majority of respondents have not attended a bootcamp before. Considering the small percentage, it makes no sense to look into the question of how many finished and how many got a job afterwords.
@@ -36,33 +44,78 @@ The majority of respondents have not attended a bootcamp before. Considering the
 
 
 ```{r}
-sum(is.na(DSInt_df$CityPopulation))
-ggplot(DSInt_df, aes(x = CityPopulation)) +
-  geom_bar()
-
 DSInt_df$IsSoftwareDev <- factor(DSInt_df$IsSoftwareDev, levels = c(1, 0),
                                      labels = c('Yes','No'))
 
- summary(DSInt_df$CountryLive)
- summary(DSInt_df$EmploymentField)
- summary(DSInt_df$IsSoftwareDev)
- summary(DSInt_df$EmploymentStatus)
+table(DSInt_df$CityPopulation)
+is.na(DSInt_df$IsSoftwareDev)
 
+DSInt_df %>%
+ggplot(aes(CityPopulation)) +
+  geom_bar(fill = "magenta")
+
+DSInt_df %>%
+  ggplot(aes(CityPopulation, fill = EmploymentStatus)) +
+  geom_bar() 
+  
+DSInt_df %>%
+  ggplot(aes(CityPopulation, fill = EmploymentStatus)) +
+  geom_bar(position = "dodge") 
+  
+summary(DSInt_df$EmploymentStatus)
+
+summary(DSInt_df$EmploymentField)
+summary(DSInt_df$CountryLive)
+
+
+DSInt_df %>%
+  group_by(EmploymentStatus) %>%
+  count(CountryLive)
+
+          
+summary(DSInt_df$IsSoftwareDev)
+summary(DSInt_df$Gender)
 ```
 
 
-The marjority of our proppects live in large cities that are 100 thousand large. And a good chunk of our prospects are from the united states. About 267 of our prospects are employed but looking for work. 137 are unemployed but looking for work.
+The marjority of our prospects live in large cities that are at least 100 thousand large. The next bar charts show a break down of the city population by employment status. 267 people are employed but looking for work and are the highest employment status regardless of city size. The second largest employment group are the umemployed but looking for work. They totals 137.
+
+
+A good chunk of our prospects are from the United States followed by the UK. Unfortunately we can't get much information out of the kinds of work individuals are doing because there are over 400 missing rows.   
 
 
 ```{r}
+#Education level, income, and expected learning
+
+DSInt_df %>%
+  mutate(SchoolDegree = fct_infreq(SchoolDegree)) %>%
+  ggplot(aes(SchoolDegree)) +
+  geom_bar(fill = "Turquoise") +
+  coord_flip()
+
 summary(DSInt_df$SchoolDegree)
 summary(DSInt_df$Income)
-summary(DSInt_df$ExpectedEarning)
 
-table(DSInt_df$Gender)
 
 ggplot(DSInt_df, aes(x = ExpectedEarning)) +
-  geom_histogram(fill = "blue")
+  geom_histogram(fill = "dark green", bins = 25)
+
+ggplot(DSInt_df, aes(x = ExpectedEarning)) +
+  geom_histogram(fill = "dark green", bins = 20)
+
+ggplot(DSInt_df, aes(ExpectedEarning)) + 
+  geom_density(aes(y = ..count..), fill = "light blue")
+
+summary(DSInt_df$ExpectedEarning)
+
+DSInt_df %>%
+  mutate(SchoolDegree = fct_infreq(SchoolDegree)) %>%
+  ggplot(aes(SchoolDegree, ExpectedEarning)) +
+  geom_boxplot() +
+    coord_flip()
+
+
+#Resources used to learn
 
 
 sum(is.na(DSInt_df$ResourceCodecademy))
@@ -92,8 +145,9 @@ sum(is.na(DSInt_df$ResourceW3Schools))
 sum(is.na(DSInt_df$ResourceYouTube))
 ```
 
- Educational level demonstrates that most folks interested in the field have a bachelors degree or higher. 
-With that we can create a basic marketing persona. We'll call him Frank. 
+Educational level demonstrates that most folks interested in the field have a bachelors degree or higher. In terms of what expected earnings are for a data related role, the numbers skew to the right. This quite odd considering the propsects live in large cities and the highest counts would be considered underpaid. The average expected earning is 61,000. At this point I'd have to question how they might have interpreted the question. Did they account for the level of the role(entry level or senior)? Did they do their own research?
+
+Sadly, there are a large amount of answers that are NA in regards to specific resources. This limits what we we can do with marketing a bit so we'll work with what we have. We can create a basic marketing persona. We'll call him Frank. 
 
 Frank is a 24 year old man living in New York City. He graduated from his university with a CS degree and is currently employed but looking to work as a data scientist. He's hoping to make $90,000 in his next role.
 
@@ -103,8 +157,28 @@ Frank is a 24 year old man living in New York City. He graduated from his univer
 ```{r}
 ## Start of part 2 to be completed.  Subsetting dataset for female demographic and following up with how to market
 
-fem <-  filter(DSInt_df, Gender == "female")
-View(fem)
+fem <-  DSInt_df %>% 
+  filter( Gender == "female") 
+  
+male <-  DSInt_df %>% 
+  filter( Gender == "male") 
+male %>%
+  mutate(SchoolDegree = fct_infreq(SchoolDegree)) %>%
+  ggplot(aes(SchoolDegree, ExpectedEarning)) +
+  geom_boxplot() +
+    coord_flip()
+
+dim(fem) 
+
+fem%>%  
+  ggplot(aes(x = ExpectedEarning)) +
+   geom_histogram (fill = "purple")
+
+fem %>%
+  mutate(SchoolDegree = fct_infreq(SchoolDegree)) %>%
+  ggplot(aes(SchoolDegree, ExpectedEarning)) +
+  geom_boxplot() +
+    coord_flip()
 
  summary(fem$CountryLive)
  summary(fem$EmploymentField)
@@ -113,6 +187,10 @@ View(fem)
  summary(fem$SchoolDegree)
  summary(fem$Income)
  summary(fem$ExpectedEarning)
+ 
+ 
 ```
 
+The profile for women isn't that much different than what has been preseneted for the overall male group. Th main difference is the minimum expected and current earnings. They're awfully low. But outside of that, it mimics males in being anything over $100,000 is an outlier. Let's call our current persona Jane.
 
+Jane is a 26 year old woman living in Sandiego, California. She graduated with a degree in statistics and is currently employed. She however would like to explore her options and is curious about exploring a machine learning role. She hopeing for a starting salary of about $80,000.
